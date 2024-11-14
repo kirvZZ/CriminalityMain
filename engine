@@ -5,26 +5,26 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		local D94LDSK38D1KSDG = Instance.new("BoolValue",game.CoreGui)
 		D94LDSK38D1KSDG.Name = "SplixCode9"
 
-		
+
 		loadstring(game:HttpGet('https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source'))()
-		
-		
+
+
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
 		local Window = Library:New({Name = "[CRIMINALITY] - v2.2.8 | HALLOWS 🎃", Accent = Color3.fromRGB(153, 51, 255)})
 		local Players = game:GetService("Players")
-		
-		
-		
-		
+
+
+
+
 		-- Tabs
 		local PlayerS = Window:Page({Name = "Player"})
 		local Aims = Window:Page({Name = "Combat"})
 		local Visual = Window:Page({Name = "Visual"})
 		local Systemz = Window:Page({Name = "Misc"})
-		
-		
-		
-		
+
+
+
+
 		-- Sections
 		local Aimlock = Aims:Section({Name = "Aim-lock", Side = "Left"})
 		local hdsx = Aims:Section({Name = "Head-Size", Side = "Left"})
@@ -37,24 +37,24 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		local LockpickSz = Systemz:Section({Name = "Lockpicks", Side = "Left"})
 		local Cameraz = Systemz:Section({Name = "Camera", Side = "Right"})
 
-		
-		
-		
+
+
+
 		_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
 		_G.EnabledJJSXKSGA = false
-		
-		
-		
+
+
+
 
 		-- Values
 		local Func = {}
-		
+
 		local infstamina = false
-		
+
 		local ragdolling = false
 		local ARotate = false
 		local NeckMove = false
-		
+
 		local Speed = false
 		local SpeedValue = 1
 		local Acceleration = false
@@ -104,7 +104,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 				end
 			end
 		end
-		
+
 		local function CreateStamina()
 			local InstanceValue = Instance.new("BoolValue")
 			local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -156,7 +156,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 			end
 			game.Players.LocalPlayer.CharacterAdded:Connect(TempCheck)
 		end
-		
+
 		local function AutoToggleStamina()
 			function TempCheck()
 				local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -227,7 +227,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 				game.Players.LocalPlayer.DevEnableMouseLock = true
 			end
 		end
-		
+
 		function neck(v)
 			if ((v) == true) then
 				if game.Players.LocalPlayer.Character then
@@ -397,7 +397,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 				end
 			end)
 		end
-		
+
 		function headsize(c,m)
 			if m ~= nil then
 				if game.Players:FindFirstChild(m) then
@@ -463,7 +463,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 				end)		
 			end)
 		end
-		
+
 		function autoneck()
 			local LocalPlayer = game.Players.LocalPlayer
 			if NeckMove then
@@ -471,7 +471,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 				LocalPlayer.CharacterAdded:Connect(nnntemp)
 			end
 		end
-		
+
 		function autorootrot()
 			local LocalPlayer = game.Players.LocalPlayer
 			function rootcheck() 
@@ -481,7 +481,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 			end
 			LocalPlayer.CharacterAdded:Connect(rootcheck)
 		end
-		
+
 		function autoragdoll()
 			local LocalPlayer = game.Players.LocalPlayer
 			function ragdollcheck() 
@@ -502,9 +502,9 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		autoneck()
 		autorootrot()
 		autoragdoll()
-		
-		
-		
+
+
+
 		-- Speed hacking
 		SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
 			Speed = Default
@@ -567,7 +567,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		Values:Toggle({Title = "Unlock all items [FAKE]",Default = false,Callback = function(Default) 
 			letmego(Default)
 		end})
-		
+
 		Values:Toggle({Title = "Inf-Stamina [Rage-dose method]",Default = false,Callback = function(Default) 
 			infstamina = Default
 			if infstamina then
@@ -576,18 +576,18 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 				RemoveStamina()
 			end
 		end})
-		
+
 		Values:Toggle({Title = "No-Neck-Movement",Default = false,Callback = function(Default) 
 			NeckMove = Default
 			neck(NeckMove)
 		end})
-		
+
 		Values:Toggle({Title = "Auto-Rotation",Default = false,Callback = function(Default) 
 			ARotate = Default
-			neck(ARotate)
+			rootrot(ARotate)
 		end})
-		
-		Values:Toggle({Title = "Ragdoll",Default = false,Callback = function(Default) 
+
+		Values:Toggle({Title = "Ragdoll [broken]",Default = false,Callback = function(Default) 
 			ragdolling = Default
 			if ragdolling then
 				_G.RagdollChar(99999)
@@ -611,14 +611,6 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 
 
 
-		-- Aimlocking
-		Aimlock:Toggle({Title = "Aimblock Enabled",Default = false,Callback = function(Default) 
-			aei(Default)
-		end})
-		
-		
-		
-		
 		-- Aimlocking
 		Aimlock:Toggle({Title = "Aimblock Enabled",Default = false,Callback = function(Default) 
 			aei(Default)
