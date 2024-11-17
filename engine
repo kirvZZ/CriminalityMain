@@ -10,7 +10,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 
 
 		local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))() -- Could Also Save It In Your Workspace And Do loadfile("Library.lua")()
-		local Window = Library:New({Name = "[CRIMINALITY] - v2.2.8 | HALLOWS 🎃", Accent = Color3.fromRGB(153, 51, 255)})
+		local Window = Library:New({Name = "[CRIMINALITY] - v2.2.8 | HALLOWS 🎃 [SOLARA VERSION]", Accent = Color3.fromRGB(153, 51, 255)})
 		local Players = game:GetService("Players")
 
 
@@ -67,16 +67,6 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 		local headsizeval = false
 		local headsizerange = 3
 		local visibleheadsize = false
-
-		local EspConfig = {
-			BillSize = UDim2.new(1000,0,1000,0),
-			FrameSize = UDim2.new(0.005,0,0.005,0),
-			FramePos = UDim2.new(0.5,0,0.5,0),
-			FramePoint = Vector2.new(0.5,0.5),
-			FrameColor = Color3.fromRGB(255,255,255),
-			Gm = game.Workspace.Terrain,
-			Gm1 = "espcnc"
-		}
 
 		local function CreateSpeed()
 			local InstanceValue = Instance.new("NumberValue")
@@ -564,11 +554,11 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 			end
 		end})
 
-		Values:Toggle({Title = "Unlock all items [FAKE]",Default = false,Callback = function(Default) 
+		Values:Toggle({Title = "Unlock all items",Default = false,Callback = function(Default) 
 			letmego(Default)
 		end})
 
-		Values:Toggle({Title = "Inf-Stamina [Rage-dose method]",Default = false,Callback = function(Default) 
+		Values:Toggle({Title = "Inf-Stamina",Default = false,Callback = function(Default) 
 			infstamina = Default
 			if infstamina then
 				CreateStamina()
@@ -587,14 +577,14 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 			rootrot(ARotate)
 		end})
 
-		Values:Toggle({Title = "Ragdoll [broken]",Default = false,Callback = function(Default) 
+		--[[Values:Toggle({Title = "Ragdoll [broken]",Default = false,Callback = function(Default) 
 			ragdolling = Default
 			if ragdolling then
 				_G.RagdollChar(99999)
 			else
 				_G.RagdollChar(1)
 			end
-		end})
+		end})]]
 
 
 
@@ -660,6 +650,7 @@ if game.PlaceId == 8343259840 or game.PlaceId == 15169303036 or game.PlaceId == 
 
 		-- Player esp
 		EspPg1:Toggle({Title = "Esp Enabled",Default = false,Callback = function(Default) 
+			esp1 = Default
 			EspToggle(Default)
 		end})
 
