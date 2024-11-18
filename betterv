@@ -85,6 +85,10 @@ function inm.loadscript()
 
 
 	-- Funcs
+	
+	for _,link in Loadstrings do
+		loadstring(game:HttpGet(..link..))()
+	end
 	function Funcs.InfinityStamina(Value)
 		if Value then
 			if ReplicatedStorage.CharStats:FindFirstChild(LocalPlayer.Name) then
