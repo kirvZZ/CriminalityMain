@@ -10,56 +10,59 @@ local PlaceTable = { 8343259840,15169303036,15169310267,15169306359 }
 local inm = {}
 
 function inm.loadscript()
-	local Loadstrings = {"https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source"}
+	_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
+	_G.EnabledJJSXKSGA = false
 	
+	local Loadstrings = {"https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source"}
+
 	local Libs = {}
 	local Windows = {}
-	
+
 	local Pages = {}
 	local Sections = {}
-	
+
 	local Values = {}
-	
+
 	local Toggles = {}
 	local Sliders = {}
 	local Keybinds = {}
-	
+
 	local Funcs = {}
-	
+
 	--Customizing library before load
 	Values.ScriptName = "[ Criminality ] — v2.2.8 | Solara Version"
 	Values.ScriptColor = Color3.fromRGB(121, 87, 255)
-	
-	
+
+
 	--Load library
 	Libs.Splix = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))()
 	Windows.Window1 = Libs.Splix:New({Name = Values.ScriptName, Accent = Values.ScriptColor})
-	
-	
+
+
 	Pages.Combat = Windows.Window1:Page({Name = "Combat"})
 	Pages.Visual = Windows.Window1:Page({Name = "Visual"})
 	Pages.Misc = Windows.Window1:Page({Name = "Misc"})
-	
-	
+
+
 	-- Combat
 	Sections.Aimlock = Pages.Combat:Section({Name = "Aimlock", Side = "Left"})
 	Sections.HeadHitbox = Pages.Combat:Section({Name = "Head-Hitbox", Side = "Right"})
-	
-	
+
+
 	-- Visual
 	Sections.Esp1 = Pages.Visual:Section({Name = "Esp", Side = "Left"})
-	
-	
+
+
 	-- Misc
 	Sections.SpeedHack = Pages.Misc:Section({Name = "Speed", Side = "Left"})
 	Sections.AcellHack = Pages.Misc:Section({Name = "Acell", Side = "Right"})
-	
+
 	Sections.LockpickHack = Pages.Misc:Section({Name = "Lockpicks", Side = "Left"})
 	Sections.CameraHack = Pages.Misc:Section({Name = "Camera", Side = "Right"})
-	
+
 	Sections.Other = Pages.Misc:Section({Name = "Other", Side = "Right"})
 	Sections.Menu = Pages.Misc:Section({Name = "Hide key", Side = "Right"})
-	
+
 
 	-- Values
 	Values.InfinityStamina = false		-- LocalPlayer
@@ -71,23 +74,24 @@ function inm.loadscript()
 	Values.Esp1 = false					-- Other Players
 	Values.HeadHitbox = false			-- Other Players
 	Values.LockpickH = false			-- LocalPlayer
-	
-	
+
+
 	-- Mods
 	Values.SpeedValue = 1
 	Values.AcellValue = 1
 	Values.LockpickValue = 1
 	Values.HitboxValue = 1
 	Values.HitboxVisible = 0.6
-	
-	
+
+
 	-- Funcs
 	function Funcs.InfinityStamina(Value)
 		if Value then
 			if ReplicatedStorage.CharStats:FindFirstChild(LocalPlayer.Name) then
-				local InfinityStamina = Instance.new("BoolValue",ReplicatedStorage.CharStats[LocalPlayer.Name])["Currents"]
+				local InfinityStamina = Instance.new("BoolValue")
 				InfinityStamina.Value = true
 				InfinityStamina.Name = "2.39418"
+				InfinityStamina.Parent = ReplicatedStorage.CharStats[LocalPlayer.Name]["Currents"]
 			end
 		else
 			if ReplicatedStorage.CharStats:FindFirstChild(LocalPlayer.Name) then
@@ -97,7 +101,7 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	function Funcs.Speed(Value)
 		if Value == 1 then
 			local InstanceValue = Instance.new("NumberValue")
@@ -134,7 +138,7 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	function Funcs.Acell(Value)
 		if Value == 1 then
 			local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -160,7 +164,7 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	function Funcs.FakeStat(Value)
 		local ReplicatedStorage = game:GetService("ReplicatedStorage")
 		local Page = ReplicatedStorage["Storage"]["ItemStats"]
@@ -185,17 +189,17 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	function Funcs.NeckMovement(Value)
 		if LocalPlayer.Character then
 			LocalPlayer.Character:SetAttribute("NoNeckMovement",Value)
 		end
 	end
-	
+
 	function Funcs.Aimlock(Value)
 		_G.EnabledJJSXKSGA = Value
 	end
-	
+
 	function Funcs.HeadHitbox(c,m)
 		if m ~= nil then
 			if game.Players:FindFirstChild(m) then
@@ -241,7 +245,7 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	local EspConfig = {
 		BillSize = UDim2.new(1000,0,1000,0),
 		FrameSize = UDim2.new(0.005,0,0.005,0),
@@ -251,7 +255,7 @@ function inm.loadscript()
 		Gm = game.Workspace.Terrain,
 		Gm1 = "espcnc"
 	}
-	
+
 	function Funcs.EspCreate(i)
 		local V,ProtectedCreation = pcall(function()
 			local EspFolder
@@ -307,7 +311,7 @@ function inm.loadscript()
 			I4.AnchorPoint = EspConfig.FramePoint
 		end)
 	end
-	
+
 	function Funcs.Esp1(Value)
 		if Value then
 			for _,i in game.Players:GetChildren() do
@@ -323,7 +327,7 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	function Funcs.LockpickH()
 		local ChildFolder = game.Players.LocalPlayer.PlayerGui
 		ChildFolder.ChildAdded:Connect(function(i)
@@ -340,7 +344,7 @@ function inm.loadscript()
 			end
 		end)
 	end
-	
+
 	function Funcs.AutoRotate(v)
 		if ((v) == true) then
 			local InstanceValue = Instance.new("BoolValue")
@@ -366,10 +370,10 @@ function inm.loadscript()
 			end
 		end
 	end
-	
+
 	-- Auto
 	coroutine.wrap(function()
-		
+
 		local function OnCharAdding(vc)
 			if Values.InfinityStamina then
 				task.wait()
@@ -396,33 +400,33 @@ function inm.loadscript()
 				Funcs.LockpickH(true)
 			end
 		end
-		LocalPlayer.CharacterAdded:Connect()
-		
+		LocalPlayer.CharacterAdded:Connect(OnCharAdding)
+
 	end)()
 	coroutine.wrap(function()
-		
+
 		local UpdateTime = 7.5
 		while true do task.wait(UpdateTime)
-			
+
 			if Values.Esp1 then
 				Funcs.Esp1(false)
 				task.wait()
 				Funcs.Esp1(true)
 			end
-			
+
 			if Values.HeadHitbox then
 				Funcs.HeadHitbox(false)
 				task.wait(.05)
 				Funcs.HeadHitbox(true)
 			end
-			
+
 		end
-		
+
 	end)()
-	
+
 	-- Window's interface
-	
-	
+
+
 	-- Speed
 	Sections.SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
 		Values.Speed = Default
@@ -434,7 +438,7 @@ function inm.loadscript()
 		Values.SpeedValue = Default
 		Funcs.Speed(3)
 	end})
-	
+
 	Sections.AcellHack:Toggle({Title = "Acceleration",Default = false,Callback = function(Default) 
 		Values.Acell = Default
 		if Default then 
@@ -446,7 +450,7 @@ function inm.loadscript()
 		Values.AcellValue = Default
 		Funcs.Acell(3)
 	end})
-	
+
 	Sections.Other:Toggle({Title = "Down Yourself",Default = false,Callback = function(Default) 
 		local LocalName = LocalPlayer.Name
 		if Default == true then
@@ -478,13 +482,13 @@ function inm.loadscript()
 
 	Sections.Other:Toggle({Title = "Auto-Rotation",Default = false,Callback = function(Default) 
 		Values.AutoRotation = Default
-		Funcs.AutoRotate(true)
+		Funcs.AutoRotate(Default)
 	end})
-	
+
 	Sections.Aimlock:Toggle({Title = "Aimlock",Default = false,Callback = function(Default) 
-		Funcs.Aimlock(Default)
+		_G.EnabledJJSXKSGA = Default
 	end})
-	
+
 	Sections.LockpickHack:Toggle({Title = "Hitboxes Enabled",Default = false,Callback = function(Default) 
 		Values.LockpickH = Default
 	end})
@@ -492,7 +496,7 @@ function inm.loadscript()
 	Sections.LockpickHack:Slider({Name = "Hitbox Size", Minimum = 0.1, Maximum = 50, Default = Values.LockpickValue, Decimals = 0.1, Pointer = Values.LockpickValue,Callback = function(Default)
 		Values.LockpickValue = Default
 	end})
-	
+
 	Sections.HeadHitbox:Toggle({Title = "Head Hitbox",Default = Values.HeadHitbox,Callback = function(Default) 
 		Values.HeadHitbox = Default
 		Funcs.HeadHitbox(Default)
@@ -511,19 +515,16 @@ function inm.loadscript()
 		if Values.HitboxValue then
 			Funcs.HeadHitbox(true) end
 	end})
-	
+
 	Sections.Esp1:Toggle({Title = "Esp Enabled",Default = false,Callback = function(Default) 
 		Values.Esp1 = Default
 		Funcs.Esp1(Default)
 	end})
 
-	_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
-	_G.EnabledJJSXKSGA = false
-	
 	Sections.Menu:Keybind({Name = "Hide key", Default = _G.SetupKeyCodeCenterSplix, KeybindName = "Readjustment", Mode = "Toggle", Pointer = _G.SetupKeyCodeCenterSplix,Callback = function(Default) 
 		_G.SetupKeyCodeCenterSplix = Default
 	end})
-	
+
 	Windows.Window1:Initialize()
 end
 
