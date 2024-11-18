@@ -381,11 +381,11 @@ function inm.loadscript()
 			end
 			if Values.Speed then
 				task.wait()
-				Funcs.Speed(true)
+				Funcs.Speed(1)
 			end
 			if Values.Acell then
 				task.wait()
-				Funcs.Acell(true)
+				Funcs.Acell(1)
 			end
 			if Values.AutoRotation then
 				task.wait()
