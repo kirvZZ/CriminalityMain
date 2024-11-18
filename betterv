@@ -1,0 +1,568 @@
+
+-- FULLY REWRITED DATA: 	19.11.2024, 0:13 AM | kirvZZ | script version (v1.7, Solara) | game version (v2.2.8) |
+
+local PlayerService =					game:GetService("Players")
+local ReplicatedStorage = 				game:GetService("ReplicatedStorage")
+local StarterGui =						game:GetService("StarterGui")
+local LocalPlayer = 					PlayerService.LocalPlayer
+
+local PlaceTable = { 8343259840,15169303036,15169310267,15169306359 }
+local inm = {}
+
+function inm.loadscript()
+	local Loadstrings = {"https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source"}
+	
+	local Libs = {}
+	local Windows = {}
+	
+	local Pages = {}
+	local Sections = {}
+	
+	local Values = {}
+	
+	local Toggles = {}
+	local Sliders = {}
+	local Keybinds = {}
+	
+	local Funcs = {}
+	
+	--Customizing library before load
+	Values.ScriptName = "[ Criminality ] — v2.2.8 | Solara Version"
+	Values.ScriptColor = Color3.fromRGB(121, 87, 255)
+	
+	
+	--Load library
+	Libs.Splix = loadstring(game:HttpGet("https://raw.githubusercontent.com/kirvZZ/SplixLib/main/source"))()
+	Windows.Window1 = Libs.Splix:New({Name = Values.ScriptName, Accent = Values.ScriptColor})
+	
+	
+	Pages.Combat = Windows.Window1:Page({Name = "Combat"})
+	Pages.Visual = Windows.Window1:Page({Name = "Visual"})
+	Pages.Misc = Windows.Window1:Page({Name = "Misc"})
+	
+	
+	-- Combat
+	Sections.Aimlock = Pages.Combat:Section({Name = "Aimlock", Side = "Left"})
+	Sections.HeadHitbox = Pages.Combat:Section({Name = "Head-Hitbox", Side = "Right"})
+	
+	
+	-- Visual
+	Sections.Esp1 = Pages.Visual:Section({Name = "Esp", Side = "Left"})
+	
+	
+	-- Misc
+	Sections.SpeedHack = Pages.Misc:Section({Name = "Speed", Side = "Left"})
+	Sections.AcellHack = Pages.Misc:Section({Name = "Acell", Side = "Right"})
+	
+	Sections.LockpickHack = Pages.Misc:Section({Name = "Lockpicks", Side = "Left"})
+	Sections.CameraHack = Pages.Misc:Section({Name = "Camera", Side = "Right"})
+	
+	Sections.Other = Pages.Misc:Section({Name = "Other", Side = "Right"})
+	Sections.Menu = Pages.Misc:Section({Name = "Hide key", Side = "Right"})
+	
+
+	-- Values
+	Values.InfinityStamina = false		-- LocalPlayer
+	Values.Ragdoll = false				-- LocalPlayer [ DOESN'T WORKING ]
+	Values.AutoRotation = false			-- LocalPlayer
+	Values.NeckMovement = false			-- LocalPlayer
+	Values.Speed = false				-- LocalPlayer
+	Values.Acell = false				-- LocalPlayer
+	Values.Esp1 = false					-- Other Players
+	Values.HeadHitbox = false			-- Other Players
+	Values.LockpickH = false			-- LocalPlayer
+	
+	
+	-- Mods
+	Values.SpeedValue = 1
+	Values.AcellValue = 1
+	Values.LockpickValue = 1
+	Values.HitboxValue = 1
+	Values.HitboxVisible = 0.6
+	
+	
+	-- Funcs
+	function Funcs.InfinityStamina(Value)
+		if Value then
+			if ReplicatedStorage.CharStats:FindFirstChild(LocalPlayer.Name) then
+				local InfinityStamina = Instance.new("BoolValue",ReplicatedStorage.CharStats[LocalPlayer.Name])["Currents"]
+				InfinityStamina.Value = true
+				InfinityStamina.Name = "2.39418"
+			end
+		else
+			if ReplicatedStorage.CharStats:FindFirstChild(LocalPlayer.Name) then
+				if ReplicatedStorage.CharStats[LocalPlayer.Name]["Currents"]:FindFirstChild("2.39418") then
+					ReplicatedStorage.CharStats[LocalPlayer.Name]["Currents"]["2.39418"]:Destroy()
+				end
+			end
+		end
+	end
+	
+	function Funcs.Speed(Value)
+		if Value == 1 then
+			local InstanceValue = Instance.new("NumberValue")
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			local NameValue = "SP_ADONIS"
+
+			if ReplicatedStorage:FindFirstChild("CharStats") then
+				local payx1 = ReplicatedStorage["CharStats"][LocalName]
+				InstanceValue.Value = Values.SpeedValue
+				InstanceValue.Name = NameValue
+				InstanceValue.Parent = payx1["Currents"]
+			end
+		elseif Value == 2 then
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			local NameValue = "SP_ADONIS"
+
+			if ReplicatedStorage:FindFirstChild("CharStats") then
+				local payv1 = ReplicatedStorage["CharStats"][LocalName]
+				if payv1["Currents"]:FindFirstChild(NameValue) then
+					payv1["Currents"][NameValue]:Destroy()
+				end
+			end
+		elseif Value == 3 then
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			if Values.Speed then
+				if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+					if ReplicatedStorage["CharStats"][LocalName]["Currents"]:FindFirstChild("SP_ADONIS") then
+						ReplicatedStorage["CharStats"][LocalName]["Currents"]["SP_ADONIS"].Value = Values.SpeedValue
+					end
+				end
+			end
+		end
+	end
+	
+	function Funcs.Acell(Value)
+		if Value == 1 then
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+				ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = Values.AcellValue
+			end
+		elseif Value == 2 then
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+				ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = 1
+			end
+		elseif Value == 3 then
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			if Values.Acell then
+				if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+					if ReplicatedStorage["CharStats"][LocalName]:FindFirstChild("AccelerationModifier") then
+						ReplicatedStorage["CharStats"][LocalName]["AccelerationModifier"].Value = Values.AcellValue
+					end
+				end
+			end
+		end
+	end
+	
+	function Funcs.FakeStat(Value)
+		local ReplicatedStorage = game:GetService("ReplicatedStorage")
+		local Page = ReplicatedStorage["Storage"]["ItemStats"]
+		for _,v1 in Page:GetChildren() do
+			for _,v2 in v1:GetChildren() do
+				for _, v3 in v2:GetChildren() do
+					if v3:IsA("IntValue") and v3.Name == "Level" then
+						if Value == 1 then
+							if v3:GetAttribute("OldLevel") ~= nil then
+								v3.Value = 1
+							else
+								v3:SetAttribute("OldLevel",v3.Value)
+								v3.Value = 1
+							end
+						else
+							if v3:GetAttribute("OldLevel") ~= nil then
+								v3.Value = v3:GetAttribute("OldLevel")
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	function Funcs.NeckMovement(Value)
+		if LocalPlayer.Character then
+			LocalPlayer.Character:SetAttribute("NoNeckMovement",Value)
+		end
+	end
+	
+	function Funcs.Aimlock(Value)
+		_G.EnabledJJSXKSGA = Value
+	end
+	
+	function Funcs.HeadHitbox(c,m)
+		if m ~= nil then
+			if game.Players:FindFirstChild(m) then
+				local v = game.Players[m]
+				if c == true then
+					if v.Character then
+						if v.Character:FindFirstChild("Head") then
+							v.Character["Head"].Size = Vector3.new(Values.HitboxValue,Values.HitboxValue,Values.HitboxValue)
+							v.Character["Head"].Massless = true
+							v.Character["Head"].Transparency = Values.HitboxVisible
+						end
+					end
+				else
+					if v.Character then
+						if v.Character:FindFirstChild("Head") then
+							v.Character["Head"].Size = Vector3.new(1.15,1.15,1.15)
+							v.Character["Head"].Massless = false
+							v.Character["Head"].Transparency = 0
+						end
+					end
+				end
+			end
+		else
+			for _,v in game.Players:GetChildren() do
+				if v.Name ~= LocalPlayer.Name then
+					if c == true then
+						if v.Character then
+							if v.Character:FindFirstChild("Head") then
+								v.Character["Head"].Size = Vector3.new(Values.HitboxValue,Values.HitboxValue,Values.HitboxValue)
+								v.Character["Head"].Massless = true
+								v.Character["Head"].Transparency = Values.HitboxVisible
+							end
+						end
+					else
+						if v.Character then
+							if v.Character:FindFirstChild("Head") then
+								v.Character["Head"].Size = Vector3.new(1.15,1.15,1.15)
+								v.Character["Head"].Transparency = 0
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+	
+	local EspConfig = {
+		BillSize = UDim2.new(1000,0,1000,0),
+		FrameSize = UDim2.new(0.005,0,0.005,0),
+		FramePos = UDim2.new(0.5,0,0.5,0),
+		FramePoint = Vector2.new(0.5,0.5),
+		FrameColor = Color3.fromRGB(255,255,255),
+		Gm = game.Workspace.Terrain,
+		Gm1 = "espcnc"
+	}
+	
+	function Funcs.EspCreate(i)
+		local V,ProtectedCreation = pcall(function()
+			local EspFolder
+			if not EspConfig.Gm:FindFirstChild("espcnc") then
+				EspFolder = Instance.new("Folder",EspConfig.Gm)
+				EspFolder.Name = EspConfig.Gm1
+			else
+				EspFolder = EspConfig.Gm
+			end
+
+			local char = i.Character
+			local humpart
+			if char:FindFirstChild("HumanoidRootPart") then
+				humpart = char:WaitForChild("HumanoidRootPart")
+			end
+
+			local I1 = Instance.new("BillboardGui")
+			local I2 = Instance.new("Frame")
+			local I3 = Instance.new("UIStroke")
+			local I4 = Instance.new("TextLabel")
+
+
+			I1.Enabled = true
+			I1.Parent = EspConfig.Gm:WaitForChild(EspConfig.Gm1)
+			I1.Adornee = humpart
+			I1.LightInfluence = 0
+			I1.AlwaysOnTop = true
+			I1.Size = EspConfig.BillSize
+			I1.ResetOnSpawn = false
+			I1.Name = i.Name
+
+			I2.Position = EspConfig.FramePos
+			I2.Size = EspConfig.FrameSize
+			I2.BackgroundTransparency = 1
+			I2.AnchorPoint = EspConfig.FramePoint
+			I2.Parent = I1
+
+			I3.Thickness = 2
+			I3.Color = EspConfig.FrameColor
+			I3.Parent = I2
+			I3.LineJoinMode = Enum.LineJoinMode.Miter
+
+			I4.Parent = I1
+			I4.Text = i.Name
+			I4.BackgroundTransparency = 1
+			I4.TextColor3 = EspConfig.FrameColor
+			I4.TextStrokeTransparency = 0
+			I4.TextSize = 14
+			I4.TextWrapped = true
+			I4.Font = "MontserratBold"
+			I4.Position = UDim2.new(0.5,0,0.503,0)
+			I4.Size = UDim2.new(0,500,0,50)
+			I4.AnchorPoint = EspConfig.FramePoint
+		end)
+	end
+	
+	function Funcs.Esp1(Value)
+		if Value then
+			for _,i in game.Players:GetChildren() do
+				if i.Name ~= LocalPlayer.Name then
+					if i.Character then
+						Funcs.EspCreate(i)
+					end
+				end
+			end
+		else
+			if EspConfig.Gm:FindFirstChild(EspConfig.Gm1) then
+				EspConfig.Gm[EspConfig.Gm1]:Destroy()
+			end
+		end
+	end
+	
+	function Funcs.LockpickH()
+		local ChildFolder = game.Players.LocalPlayer.PlayerGui
+		ChildFolder.ChildAdded:Connect(function(i)
+			if i:IsA("ScreenGui") and i.Name == "LockpickGUI" then
+				if Values.LockpickH then
+					if i:FindFirstChild("MF") then
+						for _,o in i.MF.LP_Frame.Frames:GetChildren() do
+							if o:IsA("Frame") and o:FindFirstChild("Bar") then
+								o["Bar"]["UIScale"].Scale = Values.LockpickValue
+							end 
+						end
+					end
+				end
+			end
+		end)
+	end
+	
+	function Funcs.AutoRotate(v)
+		if ((v) == true) then
+			local InstanceValue = Instance.new("BoolValue")
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			local NameValue = "ROTROOT"
+
+			if ReplicatedStorage:FindFirstChild("CharStats") then
+				local payx1 = ReplicatedStorage["CharStats"][LocalName]
+				InstanceValue.Name = NameValue
+				InstanceValue.Parent = payx1["Currents"]
+			end
+		else 
+			local ReplicatedStorage = game:GetService("ReplicatedStorage")
+			local LocalName = game.Players.LocalPlayer.Name
+			local NameValue = "ROTROOT"
+
+			if ReplicatedStorage:FindFirstChild("CharStats") then
+				local payv1 = ReplicatedStorage["CharStats"][LocalName]
+				if payv1["Currents"]:FindFirstChild(NameValue) then
+					payv1["Currents"][NameValue]:Destroy()
+				end
+			end
+		end
+	end
+	
+	-- Auto
+	coroutine.wrap(function()
+		
+		local function OnCharAdding(vc)
+			if Values.InfinityStamina then
+				task.wait()
+				Funcs.InfinityStamina(true)
+			end
+			if Values.Speed then
+				task.wait()
+				Funcs.Speed(true)
+			end
+			if Values.Acell then
+				task.wait()
+				Funcs.Acell(true)
+			end
+			if Values.AutoRotation then
+				task.wait()
+				Funcs.AutoRotate(true)
+			end
+			if Values.NeckMovement then
+				task.wait()
+				Funcs.NeckMovement(true)
+			end
+			if Values.LockpickH then
+				task.wait()
+				Funcs.LockpickH(true)
+			end
+		end
+		LocalPlayer.CharacterAdded:Connect()
+		
+	end)()
+	coroutine.wrap(function()
+		
+		local UpdateTime = 7.5
+		while true do task.wait(UpdateTime)
+			
+			if Values.Esp1 then
+				Funcs.Esp1(false)
+				task.wait()
+				Funcs.Esp1(true)
+			end
+			
+			if Values.HeadHitbox then
+				Funcs.HeadHitbox(false)
+				task.wait(.05)
+				Funcs.HeadHitbox(true)
+			end
+			
+		end
+		
+	end)()
+	
+	-- Window's interface
+	
+	
+	-- Speed
+	Sections.SpeedHack:Toggle({Title = "Speed",Default = false,Callback = function(Default) 
+		Values.Speed = Default
+		if Default then
+			Funcs.Speed(1) else
+			Funcs.Speed(2) end
+	end})
+	Sections.SpeedHack:Slider({Name = "Speed-Modifier", Minimum = 0, Maximum = 20, Default = Values.SpeedValue, Decimals = 0.1, Pointer = Values.SpeedValue,Callback = function(Default)
+		Values.SpeedValue = Default
+		Funcs.Speed(3)
+	end})
+	
+	Sections.AcellHack:Toggle({Title = "Acceleration",Default = false,Callback = function(Default) 
+		Values.Acell = Default
+		if Default then 
+			Funcs.Acell(1) else 
+			Funcs.Acell(2) end
+	end})
+
+	Sections.AcellHack:Slider({Name = "Acceleration-Modifier", Minimum = 0, Maximum = 20, Default = Values.AcellValue, Decimals = 0.1, Pointer = Values.AcellValue,Callback = function(Default)
+		Values.AcellValue = Default
+		Funcs.Acell(3)
+	end})
+	
+	Sections.Other:Toggle({Title = "Down Yourself",Default = false,Callback = function(Default) 
+		local LocalName = LocalPlayer.Name
+		if Default == true then
+			if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+				ReplicatedStorage["CharStats"][LocalName]["Downed"].Value = true
+			end
+		elseif Default == false then
+			if ReplicatedStorage["CharStats"]:FindFirstChild(LocalName) then
+				ReplicatedStorage["CharStats"][LocalName]["Downed"].Value = false
+			end
+		end
+	end})
+
+	Sections.Other:Toggle({Title = "Fake Shop Unlocking",Default = false,Callback = function(Default) 
+		Funcs.FakeStat(Default)
+	end})
+
+	Sections.Other:Toggle({Title = "Infinity Stamina",Default = false,Callback = function(Default) 
+		Values.InfinityStamina = Default
+		if Default then		
+			Funcs.InfinityStamina(true)	else
+			Funcs.InfinityStamina(false) end
+	end})
+
+	Sections.Other:Toggle({Title = "No-Neck-Movement",Default = false,Callback = function(Default) 
+		Values.NeckMovement = Default
+		Funcs.NeckMovement(Values.NeckMovement)
+	end})
+
+	Sections.Other:Toggle({Title = "Auto-Rotation",Default = false,Callback = function(Default) 
+		Values.AutoRotation = Default
+		Funcs.AutoRotate(true)
+	end})
+	
+	Sections.Aimlock:Toggle({Title = "Aimlock",Default = false,Callback = function(Default) 
+		Funcs.Aimlock(Default)
+	end})
+	
+	Sections.LockpickHack:Toggle({Title = "Hitboxes Enabled",Default = false,Callback = function(Default) 
+		Values.LockpickH = Default
+	end})
+
+	Sections.LockpickHack:Slider({Name = "Hitbox Size", Minimum = 0.1, Maximum = 50, Default = Values.LockpickValue, Decimals = 0.1, Pointer = Values.LockpickValue,Callback = function(Default)
+		Values.LockpickValue = Default
+	end})
+	
+	Sections.HeadHitbox:Toggle({Title = "Head Hitbox",Default = Values.HeadHitbox,Callback = function(Default) 
+		Values.HeadHitbox = Default
+		Funcs.HeadHitbox(Default)
+	end})
+
+	Sections.HeadHitbox:Toggle({Title = "Head Hitbox Visible",Default = Values.HitboxValue,Callback = function(Default) 
+		if Default then
+			Values.HitboxVisible = 0.6 else
+			Values.HitboxVisible = 1 end
+		if Values.HitboxValue then
+			Funcs.HeadHitbox(true) end
+	end})
+
+	Sections.HeadHitbox:Slider({Name = "Head Hitbox Size", Minimum = 1, Maximum = 15, Default = Values.HitboxValue, Decimals = 1, Pointer = Values.HitboxValue,Callback = function(Default)
+		Values.HitboxValue = Default
+		if Values.HitboxValue then
+			Funcs.HeadHitbox(true) end
+	end})
+	
+	Sections.Esp1:Toggle({Title = "Esp Enabled",Default = false,Callback = function(Default) 
+		Values.Esp1 = Default
+		Funcs.Esp1(Default)
+	end})
+
+	_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
+	_G.EnabledJJSXKSGA = false
+	
+	Sections.Menu:Keybind({Name = "Hide key", Default = _G.SetupKeyCodeCenterSplix, KeybindName = "Readjustment", Mode = "Toggle", Pointer = _G.SetupKeyCodeCenterSplix,Callback = function(Default) 
+		_G.SetupKeyCodeCenterSplix = Default
+	end})
+	
+	Windows.Window1:Initialize()
+end
+
+function inm.prestart()
+	if game.CoreGui:FindFirstChild("SplixCode9") then
+		StarterGui:SetCore("SendNotification",{
+			Title = "wware",
+			Text = "Script already executed.",
+			Duration = 10
+		})
+	else
+		local D94LDSK38D1KSDG = Instance.new("BoolValue",game.CoreGui)
+		D94LDSK38D1KSDG.Name = "SplixCode9"
+		if D94LDSK38D1KSDG then
+			inm.loadscript()
+		end
+	end
+end
+
+function inm.check()
+	local Id = game.PlaceId
+	if table.find(PlaceTable,Id) then
+		inm.prestart()
+	else
+		StarterGui:SetCore("SendNotification",{
+			Title = "wware",
+			Text = "Script doesn't support this game.",
+			Duration = 10
+		})
+	end
+end
+
+
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+--END--------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
+-------------------------------------------------
