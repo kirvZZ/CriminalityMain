@@ -11,9 +11,10 @@ local inm = {}
 
 function inm.loadscript()
 	_G.SetupKeyCodeCenterSplix = Enum.KeyCode.Insert
-	_G.EnabledJJSXKSGA = false
+	_G.EnabledJJSXKSGA3 = false
+	_G.AimPartBotZ = "Head"
 	
-	local Loadstrings = {"https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source"}
+	local Loadstrings = {"https://raw.githubusercontent.com/kirvZZ/aimlock/refs/heads/main/source3"}
 
 	local Libs = {}
 	local Windows = {}
